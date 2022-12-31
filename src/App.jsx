@@ -2,6 +2,7 @@ import { Route, Routes } from 'react-router-dom';
 import './App.css';
 import HomeProtected from './components/HomeProtected';
 import RouteProtected from './components/RouteProtected';
+import Footer from './Layout/Footer';
 import Home from './pages/Home';
 import Pokedex from './pages/Pokedex';
 import Pokemon from './pages/Pokemon';
@@ -19,6 +20,7 @@ function App() {
           <Route path="/pokedex/:id" element={<Pokemon />} />
         </Route>
       </Routes>
+      <Footer />
     </div>
   );
 }
