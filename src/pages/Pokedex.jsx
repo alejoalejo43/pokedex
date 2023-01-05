@@ -9,6 +9,7 @@ const Pokedex = () => {
   const [pokemonsFilter, setPokemonsFilter] = useState([]);
   const [types, setTypes] = useState([]);
   const [namePokemon, setNamePokemon] = useState('');
+  const [pokemonType, setPokemonType] = useState();
 
   const nameTrainer = useSelector((state) => state.nameTrainer);
 
@@ -18,15 +19,26 @@ const Pokedex = () => {
     setNamePokemon(name);
   };
   const handleChangeSelect = (e) => {
-    console.log(e.target.value);
+    setPokemonType(e.target.value);
   };
   useEffect(() => {
-    const URL = 'https://pokeapi.co/api/v2/pokemon/?limit=30';
+    const URL = `https://pokeapi.co/api/v2/${
+      pokemonType ? `type/${pokemonType}/` : 'pokemon/?limit=20'
+    }`;
     axios
       .get(URL)
-      .then((res) => setPokemons(res.data.results))
+      .then((res) => {
+        if (pokemonType) {
+          const newPokemons = res.data.pokemon.map(
+            (pokemon) => pokemon.pokemon
+          );
+          setPokemons(newPokemons);
+        } else {
+          setPokemons(res.data.results);
+        }
+      })
       .catch((err) => console.log(err));
-  }, []);
+  }, [pokemonType]);
   useEffect(() => {
     const URL = 'https://pokeapi.co/api/v2/type/';
     axios
