@@ -17,6 +17,9 @@ const Pokedex = () => {
     const name = e.target.namePokemon.value;
     setNamePokemon(name);
   };
+  const handleChangeSelect = (e) => {
+    console.log(e.target.value);
+  };
   useEffect(() => {
     const URL = 'https://pokeapi.co/api/v2/pokemon/?limit=30';
     axios
@@ -36,7 +39,7 @@ const Pokedex = () => {
       pokemon.name.includes(namePokemon)
     );
     setPokemonsFilter(newPokemons);
-  }, [namePokemon]);
+  }, [namePokemon, pokemons]);
   return (
     <main>
       <header>
@@ -50,7 +53,7 @@ const Pokedex = () => {
             <input type="text" id="namePokemon" />
             <button type="submit">Search</button>
           </div>
-          <select className="pokedex__select">
+          <select onChange={handleChangeSelect} className="pokedex__select">
             <option value="">All pokemons</option>
             {types.map((type) => (
               <option value={type.name} key={type.url}>

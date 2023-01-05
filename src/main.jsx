@@ -16,3 +16,5 @@ ReactDOM.createRoot(document.getElementById('root')).render(
   </React.StrictMode>
 );
 // 35:52
+//vamos bien hasta el minuto 50
+//falta tomar el valor del select
